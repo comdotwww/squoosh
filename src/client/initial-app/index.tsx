@@ -31,27 +31,28 @@ main();
       ? 'standalone'
       : 'browser';
 
-// Setup analytics
-window.dataLayer = window.dataLayer || [];
-function gtag(){ dataLayer.push(arguments); }
-gtag('js', new Date());
+  // Setup gtag (Google Analytics 4)
+  window.dataLayer = window.dataLayer || [];
+  function gtag(...args: any[]) {
+    window.dataLayer.push(args);
+  }
 
-// 配置 GA4 属性
-gtag('config', 'G-62Y3EHCTRX', {
-    'transport_type': 'beacon',
-    'dimension1': displayMode // 假设您已在 GA4 中设置了这个自定义维度
-});
+  gtag('js', new Date());
 
-// 发送页面查看事件
-gtag('event', 'page_view', {
+  // Setup GA4 config
+  gtag('config', 'G-62Y3EHCTRX', {
     page_path: '/index.html',
-    title: 'Squoosh'
-});
+    page_title: 'Squoosh',
+    user_properties: {
+      displayMode: displayMode,
+    },
+  });
 
-// 加载 GA 脚本而不阻塞浏览器加载
-addEventListener('load', () => {
+  // Load the GA script asynchronously
+  addEventListener('load', () => {
     const script = document.createElement('script');
     script.src = 'https://www.googletagmanager.com/gtag/js?id=G-62Y3EHCTRX';
     document.head.appendChild(script);
-});
+  });
+    
 }

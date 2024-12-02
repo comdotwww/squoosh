@@ -59,9 +59,11 @@ declare var ga: {
   q: any[];
 };
 
-interface Window {
-  dataLayer: any[];
-  gtag: (...args: any[]) => void;
-}
+// declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+// }
+
 
 declare const __PRODUCTION__: boolean;
