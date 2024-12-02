@@ -33,14 +33,20 @@ main();
 
   // Setup analytics
   window.ga = window.ga || ((...args) => (ga.q = ga.q || []).push(args));
-  ga('create', 'UA-128752250-1', 'auto');
+  ga('create', 'G-62Y3EHCTRX', 'auto');
   ga('set', 'transport', 'beacon');
   ga('set', 'dimension1', displayMode);
+  
   ga('send', 'pageview', '/index.html', { title: 'Squoosh' });
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-62Y3EHCTRX');
   // Load the GA script without keeping the browser spinner going.
   addEventListener('load', () => {
     const script = document.createElement('script');
-    script.src = 'https://www.google-analytics.com/analytics.js';
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-62Y3EHCTRX';
     document.head.appendChild(script);
   });
 }
