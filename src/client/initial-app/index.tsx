@@ -31,22 +31,27 @@ main();
       ? 'standalone'
       : 'browser';
 
-  // Setup analytics
-  window.ga = window.ga || ((...args) => (ga.q = ga.q || []).push(args));
-  ga('create', 'G-62Y3EHCTRX', 'auto');
-  ga('set', 'transport', 'beacon');
-  ga('set', 'dimension1', displayMode);
-  
-  ga('send', 'pageview', '/index.html', { title: 'Squoosh' });
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+// Setup analytics
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+gtag('js', new Date());
 
-  gtag('config', 'G-62Y3EHCTRX');
-  // Load the GA script without keeping the browser spinner going.
-  addEventListener('load', () => {
+// 配置 GA4 属性
+gtag('config', 'G-62Y3EHCTRX', {
+    'transport_type': 'beacon',
+    'dimension1': displayMode // 假设您已在 GA4 中设置了这个自定义维度
+});
+
+// 发送页面查看事件
+gtag('event', 'page_view', {
+    page_path: '/index.html',
+    title: 'Squoosh'
+});
+
+// 加载 GA 脚本而不阻塞浏览器加载
+addEventListener('load', () => {
     const script = document.createElement('script');
     script.src = 'https://www.googletagmanager.com/gtag/js?id=G-62Y3EHCTRX';
     document.head.appendChild(script);
-  });
+});
 }
